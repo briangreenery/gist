@@ -1,0 +1,48 @@
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Gist</a>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <form class="form-inline" role="form">
+      <div class="form-group">
+        <input type="text" class="form-control" id="fileName" placeholder="Name this file">
+      </div>
+      <div class="btn-group pull-right">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          language: <strong>C++</strong> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+         <li><a href="#">C++</a></li>
+         <li><a href="#">JavaScript</a></li>
+         <li><a href="#">Perl</a></li>
+         <li><a href="#">Python</a></li>
+         <li><a href="#">Ruby</a></li>
+         <li><a href="#">Shell</a></li>
+         <li><a href="#">Text</a></li>
+        </ul>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <div class="bubble">
+      <div id="editor"></div>
+    </div>
+  </div>
+  <div class="row">
+    <button type="button" class="btn btn-primary pull-right">Create Gist</button>
+  </div>
+</div>
+<script>
+  var editor = ace.edit('editor');
+  editor.getSession().setMode('ace/mode/c_cpp');
+  editor.getSession().setUseWrapMode(false);
+  editor.renderer.setShowPrintMargin(false);
+  editor.setHighlightActiveLine(false);
+  editor.setDisplayIndentGuides(false);
+  editor.setFontSize(12);
+  editor.focus();
+</script>

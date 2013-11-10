@@ -1,0 +1,11 @@
+.bubble {
+  background-color: #eee;
+  border-radius: 3px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  padding: 3px;
+}
+
+#editor {
+  height: 500px;
+}

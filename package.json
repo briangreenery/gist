@@ -1,0 +1,9 @@
+{
+  "name": "relevance.io",
+  "description": "A simple github gist clone",
+  "author": "ohana",
+  "dependencies": {
+    "express": "3.4.x",
+    "express3-handlebars": "0.5.x"
+  }
+}
