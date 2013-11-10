@@ -1,7 +1,7 @@
 <div class="navbar navbar-default navbar-static-top">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">Gist</a>
+      <a class="navbar-brand" href="/"><strong>PlatDev</strong> Gist</a>
     </div>
   </div>
 </div>
@@ -12,17 +12,18 @@
         <input type="text" class="form-control" id="fileName" placeholder="Name this file">
       </div>
       <div class="btn-group pull-right">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-          language: <strong>C++</strong> <span class="caret"></span>
+        <button id="languagePicker" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          language: <strong id="currentLanguage">C++</strong> <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-         <li><a href="#">C++</a></li>
-         <li><a href="#">JavaScript</a></li>
-         <li><a href="#">Perl</a></li>
-         <li><a href="#">Python</a></li>
-         <li><a href="#">Ruby</a></li>
-         <li><a href="#">Shell</a></li>
-         <li><a href="#">Text</a></li>
+         <li><a href="#" class="language">C++</a></li>
+         <li><a href="#" class="language">JavaScript</a></li>
+         <li><a href="#" class="language">Perl</a></li>
+         <li><a href="#" class="language">Python</a></li>
+         <li><a href="#" class="language">Ruby</a></li>
+         <li><a href="#" class="language">Shell</a></li>
+         <li><a href="#" class="language">SQL</a></li>
+         <li><a href="#" class="language">Text</a></li>
         </ul>
       </div>
     </form>
@@ -45,4 +46,22 @@
   editor.setDisplayIndentGuides(false);
   editor.setFontSize(12);
   editor.focus();
+
+  var modes = {
+    'C++': 'c_cpp',
+    'JavaScript': 'javascript',
+    'Perl': 'perl',
+    'Python': 'python',
+    'Ruby': 'ruby',
+    'Shell': 'sh',
+    'SQL': 'sql',
+    'Text': 'text'
+  };
+
+  $('.language').click(function (e) {
+    var language = $(this).text()
+    editor.getSession().setMode('ace/mode/' + modes[language]);
+    $('#currentLanguage').text(language);
+    e.preventDefault();
+  });
 </script>
