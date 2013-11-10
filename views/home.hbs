@@ -34,7 +34,7 @@
     </div>
   </div>
   <div class="row">
-    <button type="button" class="btn btn-primary pull-right">Create Gist</button>
+    <button type="button" id="createGist" class="btn btn-primary pull-right">Create Gist</button>
   </div>
 </div>
 <script>
@@ -63,5 +63,17 @@
     editor.getSession().setMode('ace/mode/' + modes[language]);
     $('#currentLanguage').text(language);
     e.preventDefault();
+  });
+
+  $('#createGist').click(function (e) {
+    var gist = {
+      'name': $('#fileName').val(),
+      'language': $('#currentLanguage').text(),
+      'contents': editor.getValue()
+    };
+
+    $.post('/gist/create', JSON.stringify(gist), function (response) {
+      window.location.href = location.protocol + '//' + location.host + '/gist/' + response;
+    });
   });
 </script>
