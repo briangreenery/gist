@@ -1,11 +1,30 @@
 .bubble {
   background-color: #eee;
   border-radius: 3px;
+  padding: 3px;
+}
+
+.margin-12 {
   margin-top: 12px;
   margin-bottom: 12px;
-  padding: 3px;
 }
 
 #editor {
   height: 500px;
+}
+
+.header {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.contents {
+  background-color: #fff;
+  padding: 12px;
+  display: block;
+  font-family: monospace;
+  white-space: pre;
+  font-size: 12px;
 }
