@@ -4,8 +4,12 @@
   padding: 3px;
 }
 
-.margin-12 {
-  margin-top: 12px;
+.margin-6 {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.bottom-12 {
   margin-bottom: 12px;
 }
 
