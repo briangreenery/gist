@@ -33,7 +33,15 @@ app.get('/gist', function (req, res) {
 
 app.get('/gist/:id', function (req, res) {
   var gist = JSON.parse(fs.readFileSync(path.join(uploadsDir, req.params.id)));
+  gist.id = req.params.id;
   res.render('gist', gist);
+});
+
+app.get('/gist/:id/raw', function (req, res) {
+  var gist = JSON.parse(fs.readFileSync(path.join(uploadsDir, req.params.id)));
+  gist.id = req.params.id;
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.send(gist.contents);
 });
 
 app.post('/gist/create', function (req, res) {
