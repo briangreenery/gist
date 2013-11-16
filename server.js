@@ -75,5 +75,10 @@ app.post('/gist/create', function (req, res) {
   });
 });
 
+app.use(function (req, res, next) {
+  res.status(404);
+  res.render('404');
+});
+
 var port = process.env.PORT || 3000;
 app.listen(port);
