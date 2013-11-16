@@ -25,18 +25,16 @@
   margin-right: 12px;
 }
 
-.contents {
+#contents {
   background-color: #fff;
   margin-top: 6px;
   border: 1px solid #e7e7e7;
   box-shadow: 0 1px 3px 0 #eee;
   border-radius: 3px;
 
-  padding: 12px;
+  padding: 6px;
   margin-bottom: 12px;
 
   display: block;
-  font-family: monospace;
   white-space: pre;
-  font-size: 12px;
 }
