@@ -5,7 +5,8 @@ exports.cssClass = "ace-gist";
 exports.cssText = "\
 .ace-gist .ace_gutter {\
 border-right: 1px solid #eee;\
-color: #333\
+margin-right: 9px;\
+color: #bbb\
 }\
 .ace-gist .ace_print-margin {\
 width: 1px;\
@@ -46,6 +47,9 @@ border: 1px solid #B5D5FF\
 .ace-gist .ace_meta,\
 .ace-gist .ace_variable.ace_language {\
 color: #C800A4\
+}\
+.ace-gist .ace_keyword.ace_operator {\
+color: #000\
 }\
 .ace-gist .ace_invisible {\
 color: #BFBFBF\
