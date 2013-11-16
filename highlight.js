@@ -13,10 +13,6 @@ global.location  = browser.location;
 
 require('./public/deps/ace/ace.js');
 require('./public/deps/ace/ext-static_highlight.js');
-
-require('./public/deps/ace/mode-c_cpp.js');
-require('./public/deps/ace/mode-javascript.js');
-
 require('./public/deps/ace/theme-gist.js');
 
 var modes = [];
