@@ -21,7 +21,7 @@
   var dom = ace.require('ace/lib/dom');
 
   var mode = 'ace/mode/' + modes['{{language}}'];
-  var theme = 'ace/theme/xcode';
+  var theme = 'ace/theme/gist';
   var data = $('#contents').text();
 
   highlighter.render(data, mode, theme, 1, true, function (highlighted) {    
