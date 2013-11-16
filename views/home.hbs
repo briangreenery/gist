@@ -6,17 +6,10 @@
           language: <strong id="currentLanguage">C++</strong> <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-         <li><a href="#" class="language">C++</a></li>
-         <li><a href="#" class="language">CSS</a></li>
-         <li><a href="#" class="language">HTML</a></li>
-         <li><a href="#" class="language">JavaScript</a></li>
-         <li><a href="#" class="language">Perl</a></li>
-         <li><a href="#" class="language">Python</a></li>
-         <li><a href="#" class="language">Ruby</a></li>
-         <li><a href="#" class="language">Shell</a></li>
-         <li><a href="#" class="language">SQL</a></li>
-         <li><a href="#" class="language">Text</a></li>
-        </ul>
+          {{#each languages}}
+            <li><a href="#" class="language">{{name}}</a></li>
+          {{/each}}
+          </ul>
       </div>
     </form>
   </div>
@@ -41,16 +34,9 @@
   editor.focus();
 
   var modes = {
-    'C++': 'c_cpp',
-    'CSS': 'css',
-    'HTML': 'html',
-    'JavaScript': 'javascript',
-    'Perl': 'perl',
-    'Python': 'python',
-    'Ruby': 'ruby',
-    'Shell': 'sh',
-    'SQL': 'sql',
-    'Text': 'text'
+    {{#each languages}}
+      '{{name}}': '{{mode}}',
+    {{/each}}
   };
 
   $('.language').click(function (e) {

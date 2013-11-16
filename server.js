@@ -15,7 +15,20 @@ var randomName = function (length) {
   }
 
   return name;
-}
+};
+
+var languages = [
+  {name:'C++',        mode:'c_cpp'},
+  {name:'CSS',        mode:'css'},
+  {name:'HTML',       mode:'html'},
+  {name:'JavaScript', mode:'javascript'},
+  {name:'Perl',       mode:'perl'},
+  {name:'Python',     mode:'python'},
+  {name:'Ruby',       mode:'ruby'},
+  {name:'Shell',      mode:'sh'},
+  {name:'SQL',        mode:'sql'},
+  {name:'Text',       mode:'text'}
+];
 
 var uploadsDir = path.join(__dirname, 'uploads');
 
@@ -28,13 +41,13 @@ app.set('view engine', 'hbs');
 app.use('/gist', express.static(path.join(__dirname, 'public')));
 
 app.get('/gist', function (req, res) {
-  res.render('home');
+  res.render('home', {languages:languages});
 });
 
 app.get('/gist/:id', function (req, res) {
   var gist = JSON.parse(fs.readFileSync(path.join(uploadsDir, req.params.id)));
   gist.id = req.params.id;
-  res.render('gist', gist);
+  res.render('gist', {gist:gist, languages:languages});
 });
 
 app.get('/gist/:id/raw', function (req, res) {

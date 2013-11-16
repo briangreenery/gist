@@ -1,26 +1,19 @@
 <div class="container">
-  <strong class="text-muted">{{language}}</strong>
-  <a href="/gist/{{id}}/raw" class="pull-right">Raw</a>
-  <div id="contents">{{contents}}</div>
+  <strong class="text-muted">{{gist.language}}</strong>
+  <a href="/gist/{{gist.id}}/raw" class="pull-right">Raw</a>
+  <div id="contents">{{gist.contents}}</div>
 </div>
 <script>
   var modes = {
-    'C++': 'c_cpp',
-    'CSS': 'css',
-    'HTML': 'html',
-    'JavaScript': 'javascript',
-    'Perl': 'perl',
-    'Python': 'python',
-    'Ruby': 'ruby',
-    'Shell': 'sh',
-    'SQL': 'sql',
-    'Text': 'text'
+    {{#each languages}}
+      '{{name}}': '{{mode}}',
+    {{/each}}
   };
 
   var highlighter = ace.require('ace/ext/static_highlight');
   var dom = ace.require('ace/lib/dom');
 
-  var mode = 'ace/mode/' + modes['{{language}}'];
+  var mode = 'ace/mode/' + modes['{{gist.language}}'];
   var theme = 'ace/theme/gist';
   var data = $('#contents').text();
 
