@@ -33,10 +33,10 @@ margin: -1px 0 0 -1px;\
 border: 1px solid #BFBFBF\
 }\
 .ace-gist .ace_marker-layer .ace_active-line {\
-background: rgba(0, 0, 0, 0.071)\
+background: #f8f8f8\
 }\
 .ace-gist .ace_gutter-active-line {\
-background-color: rgba(0, 0, 0, 0.071)\
+background-color: #f8f8f8\
 }\
 .ace-gist .ace_marker-layer .ace_selected-word {\
 border: 1px solid #B5D5FF\

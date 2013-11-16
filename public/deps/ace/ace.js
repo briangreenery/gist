@@ -16702,7 +16702,7 @@ border: 1px solid rgb(192, 192, 192);\
 background: rgba(0, 0, 0, 0.07);\
 }\
 .ace-tm .ace_gutter-active-line {\
-background-color : #dcdcdc;\
+background-color : #f8f8f8\
 }\
 .ace-tm .ace_marker-layer .ace_selected-word {\
 background: rgb(250, 250, 255);\
