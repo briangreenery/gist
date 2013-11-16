@@ -1,9 +1,11 @@
 {
-  "name": "relevance.io",
+  "name": "gist",
   "description": "A simple github gist clone",
   "author": "ohana",
   "dependencies": {
     "express": "3.4.x",
-    "express3-handlebars": "0.5.x"
+    "express3-handlebars": "0.5.x",
+    "amd-loader": "0.0.x",
+    "jsdom": "0.8.x"
   }
 }
