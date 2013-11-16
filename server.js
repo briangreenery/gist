@@ -38,6 +38,7 @@ if (!fs.existsSync(uploadsDir))
 app.engine('hbs', exphbs({defaultLayout: 'main.hbs'}));
 app.set('view engine', 'hbs');
 
+app.use(express.compress());
 app.use('/gist', express.static(path.join(__dirname, 'public')));
 
 app.get('/gist', function (req, res) {
@@ -45,7 +46,6 @@ app.get('/gist', function (req, res) {
 });
 
 app.get('/gist/:id', function (req, res, next) {
-  console.log('/gist/:id');
   fs.readFile(path.join(uploadsDir, req.params.id), function (err, data) {
     if (err) 
       return next();
@@ -57,11 +57,10 @@ app.get('/gist/:id', function (req, res, next) {
 });
 
 app.get('/gist/:id/raw', function (req, res, next) {
-  console.log('/gist/:id/raw');
   fs.readFile(path.join(uploadsDir, req.params.id), function (err, data) {
     if (err) 
       return next();
-    
+
     var gist = JSON.parse(data);
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
     res.send(gist.contents);
