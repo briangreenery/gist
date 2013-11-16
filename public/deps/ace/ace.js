@@ -16592,7 +16592,8 @@ ace.define('ace/theme/textmate', ['require', 'exports', 'module' , 'ace/lib/dom'
 exports.isDark = false;
 exports.cssClass = "ace-tm";
 exports.cssText = ".ace-tm .ace_gutter {\
-background: #f0f0f0;\
+background: #fff;\
+border-right: 1px solid #eee;\
 color: #333;\
 }\
 .ace-tm .ace_print-margin {\
