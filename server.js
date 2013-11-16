@@ -3,6 +3,9 @@ var exphbs = require('express3-handlebars');
 var path = require('path');
 var fs = require('fs');
 
+var highlight = require('./highlight');
+var languages = require('./languages');
+
 var app = express();
 
 var randomName = function (length) {
@@ -16,19 +19,6 @@ var randomName = function (length) {
 
   return name;
 };
-
-var languages = [
-  {name:'C++',        mode:'c_cpp'},
-  {name:'CSS',        mode:'css'},
-  {name:'HTML',       mode:'html'},
-  {name:'JavaScript', mode:'javascript'},
-  {name:'Perl',       mode:'perl'},
-  {name:'Python',     mode:'python'},
-  {name:'Ruby',       mode:'ruby'},
-  {name:'Shell',      mode:'sh'},
-  {name:'SQL',        mode:'sql'},
-  {name:'Text',       mode:'text'}
-];
 
 var uploadsDir = path.join(__dirname, 'uploads');
 
@@ -51,8 +41,9 @@ app.get('/gist/:id', function (req, res, next) {
       return next();
 
     var gist = JSON.parse(data);
-    gist.id = req.params.id;
-    res.render('gist', {gist:gist, languages:languages});
+    var highlighted = highlight(gist.contents, gist.language);
+
+    res.render('gist', {css: highlighted.css, html: highlighted.html, language: gist.language, id: req.params.id});
   });
 });
 
@@ -82,3 +73,5 @@ app.use(function (req, res, next) {
 
 var port = process.env.PORT || 3000;
 app.listen(port);
+
+console.log('Listening on port ' + port);
