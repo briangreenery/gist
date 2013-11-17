@@ -46,6 +46,13 @@ padding: 0 3px 0 0;\
 margin-right: 3px;\
 position: static !important;\
 }\
+.ace_static_highlight .ace_gutter-cell:before {\
+    content: counter(ace_line, decimal);\
+    counter-increment: ace_line;\
+}\
+.ace_static_highlight {\
+    counter-reset: ace_line;\
+}\
 .ace_static_highlight .ace_line { clear: both; }\
 .ace_static_highlight .ace_gutter-cell {\
 -moz-user-select: -moz-none;\
@@ -146,12 +153,12 @@ highlight.renderSync = function(input, mode, theme, lineStart, disableGutter) {
     for(var ix = 0; ix < length; ix++) {
         stringBuilder.push("<div class='ace_line'>");
         if (!disableGutter)
-            stringBuilder.push("<span class='ace_gutter ace_gutter-cell' unselectable='on'>" + (ix + lineStart) + "</span>");
+            stringBuilder.push("<span class='ace_gutter ace_gutter-cell' unselectable='on'></span>");
         textLayer.$renderLine(stringBuilder, ix, true, false);
         stringBuilder.push("\n</div>");
     }
     var html = "<div class='" + theme.cssClass + "'>" +
-        "<div class='ace_static_highlight'>" +
+        "<div class='ace_static_highlight' style='counter-reset:ace_line " + (lineStart - 1) + "'>" +
             stringBuilder.join("") +
         "</div>" +
     "</div>";

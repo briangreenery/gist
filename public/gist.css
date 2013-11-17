@@ -32,9 +32,10 @@
   box-shadow: 0 1px 3px 0 #eee;
   border-radius: 3px;
 
-  padding: 12px;
+  padding: 6px;
   margin-bottom: 12px;
 
   display: block;
   white-space: pre;
+  overflow: scroll;
 }

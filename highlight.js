@@ -25,5 +25,5 @@ var highlighter = ace.require('ace/ext/static_highlight');
 var theme = ace.require('ace/theme/gist');
 
 module.exports = function (data, language) {
-  return highlighter.renderSync(data, modes[language], theme, 1, true);
+  return highlighter.renderSync(data, modes[language], theme, 1, false);
 };
