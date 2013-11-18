@@ -35,6 +35,17 @@ app.get('/gist', function (req, res) {
   res.render('home', {languages:languages});
 });
 
+app.get('/gist/:id.txt', function (req, res, next) {
+  fs.readFile(path.join(uploadsDir, req.params.id), function (err, data) {
+    if (err) 
+      return next();
+
+    var gist = JSON.parse(data);
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.send(gist.contents);
+  });
+});
+
 app.get('/gist/:id', function (req, res, next) {
   fs.readFile(path.join(uploadsDir, req.params.id), function (err, data) {
     if (err) 
@@ -44,17 +55,6 @@ app.get('/gist/:id', function (req, res, next) {
     var highlighted = highlight(gist.contents, gist.language);
 
     res.render('gist', {css: highlighted.css, html: highlighted.html, language: gist.language, id: req.params.id});
-  });
-});
-
-app.get('/gist/:id/raw', function (req, res, next) {
-  fs.readFile(path.join(uploadsDir, req.params.id), function (err, data) {
-    if (err) 
-      return next();
-
-    var gist = JSON.parse(data);
-    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-    res.send(gist.contents);
   });
 });
 
