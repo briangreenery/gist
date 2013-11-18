@@ -38,7 +38,7 @@ font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', 'D
 font-size: 12px;\
 }\
 .ace_static_highlight .ace_gutter {\
-width: 25px !important;\
+width: 35px !important;\
 display: block;\
 float: left;\
 text-align: right;\

@@ -3,26 +3,12 @@
   border: 1px solid #e7e7e7;
   box-shadow: 0 1px 3px 0 #eee;
   border-radius: 3px;
-}
-
-.margin-6 {
   margin-top: 6px;
   margin-bottom: 6px;
-}
-
-.bottom-12 {
-  margin-bottom: 12px;
 }
 
 #editor {
   height: 500px;
-}
-
-.header {
-  margin-top: 6px;
-  margin-bottom: 6px;
-  margin-left: 12px;
-  margin-right: 12px;
 }
 
 #contents {
@@ -31,10 +17,7 @@
   border: 1px solid #e7e7e7;
   box-shadow: 0 1px 3px 0 #eee;
   border-radius: 3px;
-
-  padding: 6px;
   margin-bottom: 12px;
-
   display: block;
   white-space: pre;
   overflow: scroll;
