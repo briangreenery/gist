@@ -22,3 +22,9 @@
   white-space: pre;
   overflow: scroll;
 }
+
+.contents-spacer {
+  height: 6px;
+  width: 35px;
+  border-right: 1px solid #eee;
+}
