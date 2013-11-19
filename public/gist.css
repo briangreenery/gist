@@ -20,6 +20,7 @@
   margin-bottom: 12px;
   display: block;
   white-space: pre;
+  overflow-x: auto;
 }
 
 .contents-spacer {
