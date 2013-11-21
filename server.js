@@ -6,8 +6,6 @@ var fs = require('fs');
 var highlight = require('./highlight');
 var languages = require('./languages');
 
-var app = express();
-
 var randomName = function (length) {
   var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -24,6 +22,10 @@ var uploadsDir = path.join(__dirname, 'uploads');
 
 if (!fs.existsSync(uploadsDir))
   fs.mkdirSync(uploadsDir);
+
+var app = express();
+
+app.disable('x-powered-by');
 
 app.engine('hbs', exphbs({defaultLayout: 'main.hbs'}));
 app.set('view engine', 'hbs');
