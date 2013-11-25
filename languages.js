@@ -3,10 +3,12 @@ module.exports = [
   {name:'CSS',        mode:'css'},
   {name:'HTML',       mode:'html'},
   {name:'JavaScript', mode:'javascript'},
+  {name:'JSON',       mode:'json'},
   {name:'Perl',       mode:'perl'},
   {name:'Python',     mode:'python'},
   {name:'Ruby',       mode:'ruby'},
   {name:'Shell',      mode:'sh'},
   {name:'SQL',        mode:'sql'},
-  {name:'Text',       mode:'text'}
+  {name:'Text',       mode:'text'},
+  {name:'XML',        mode:'xml'}
 ];
