@@ -1,11 +1,29 @@
 {
   "name": "gist",
   "description": "A simple github gist clone",
-  "author": "ohana",
+  "author": "Brian Green",
   "dependencies": {
-    "express": "3.4.x",
-    "express3-handlebars": "0.5.x",
-    "amd-loader": "0.0.x",
-    "jsdom": "0.8.x"
-  }
+    "amd-loader": "0.0.5",
+    "express": "^4.4.0",
+    "express3-handlebars": "^0.5.0",
+    "jsdom": "^0.10.6"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "version": "0.0.1",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/briangreenery/gist.git"
+  },
+  "keywords": [
+    "gist"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/briangreenery/gist/issues"
+  },
+  "homepage": "https://github.com/briangreenery/gist"
 }

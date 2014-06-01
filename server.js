@@ -30,11 +30,10 @@ app.disable('x-powered-by');
 app.engine('hbs', exphbs({defaultLayout: 'main.hbs'}));
 app.set('view engine', 'hbs');
 
-app.use(express.compress());
 app.use('/gist', express.static(path.join(__dirname, 'public')));
 
 app.get('/gist', function (req, res) {
-  res.render('home', {languages:languages});
+  res.render('home', {languages: languages, name: 'PlatDev Gist'});
 });
 
 app.get('/gist/:id.txt', function (req, res, next) {
@@ -56,7 +55,13 @@ app.get('/gist/:id', function (req, res, next) {
     var gist = JSON.parse(data);
     var highlighted = highlight(gist.contents, gist.language);
 
-    res.render('gist', {css: highlighted.css, html: highlighted.html, language: gist.language, id: req.params.id});
+    res.render('gist', {
+      name: 'gist:' + req.params.id,
+      css: highlighted.css,
+      html: highlighted.html,
+      language: gist.language,
+      id: req.params.id
+    });
   });
 });
 
