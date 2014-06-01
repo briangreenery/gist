@@ -1,8 +1,8 @@
 var express = require('express'),
   exphbs = require('express3-handlebars'),
   fs = require('fs'),
-  highlight = require('./highlight'),
-  languages = require('./languages'),
+  highlight = require('./lib/highlight'),
+  languages = require('./lib/languages'),
   marked = require('marked'),
   path = require('path');
 
