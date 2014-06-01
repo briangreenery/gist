@@ -46,20 +46,21 @@ padding: 0 3px 0 0;\
 margin-right: 3px;\
 position: static !important;\
 }\
-.ace_static_highlight .ace_gutter-cell:before {\
-    content: counter(ace_line, decimal);\
-    counter-increment: ace_line;\
-}\
-.ace_static_highlight {\
-    counter-reset: ace_line;\
-}\
 .ace_static_highlight .ace_line { clear: both; }\
 .ace_static_highlight .ace_gutter-cell {\
 -moz-user-select: -moz-none;\
 -khtml-user-select: none;\
 -webkit-user-select: none;\
 user-select: none;\
-}";
+}\
+.ace_static_highlight .ace_gutter-cell:before {\
+content: counter(ace_line, decimal);\
+counter-increment: ace_line;\
+}\
+.ace_static_highlight {\
+counter-reset: ace_line;\
+}\
+";
 var config = require("../config");
 var dom = require("../lib/dom");
 
@@ -153,7 +154,7 @@ highlight.renderSync = function(input, mode, theme, lineStart, disableGutter) {
     for(var ix = 0; ix < length; ix++) {
         stringBuilder.push("<div class='ace_line'>");
         if (!disableGutter)
-            stringBuilder.push("<span class='ace_gutter ace_gutter-cell' unselectable='on'></span>");
+            stringBuilder.push("<span class='ace_gutter ace_gutter-cell' unselectable='on'>" + /*(ix + lineStart) + */ "</span>");
         textLayer.$renderLine(stringBuilder, ix, true, false);
         stringBuilder.push("\n</div>");
     }
@@ -175,3 +176,8 @@ highlight.renderSync = function(input, mode, theme, lineStart, disableGutter) {
 module.exports = highlight;
 module.exports.highlight =highlight;
 });
+;
+                (function() {
+                    ace.require(["ace/ext/static_highlight"], function() {});
+                })();
+            
