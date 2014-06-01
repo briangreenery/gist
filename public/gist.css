@@ -19,8 +19,15 @@
   border-radius: 3px;
   margin-bottom: 12px;
   display: block;
+}
+
+.code {
   white-space: pre;
   overflow-x: auto;
+}
+
+.markdown {
+  padding: 30px;
 }
 
 .contents-spacer {

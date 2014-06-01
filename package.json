@@ -6,7 +6,8 @@
     "amd-loader": "0.0.5",
     "express": "^4.4.0",
     "express3-handlebars": "^0.5.0",
-    "jsdom": "^0.10.6"
+    "jsdom": "^0.10.6",
+    "marked": "^0.3.2"
   },
   "scripts": {
     "start": "node server.js"

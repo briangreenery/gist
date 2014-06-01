@@ -1,10 +1,10 @@
-var express = require('express');
-var exphbs = require('express3-handlebars');
-var path = require('path');
-var fs = require('fs');
-
-var highlight = require('./highlight');
-var languages = require('./languages');
+var express = require('express'),
+  exphbs = require('express3-handlebars'),
+  fs = require('fs'),
+  highlight = require('./highlight'),
+  languages = require('./languages'),
+  marked = require('marked'),
+  path = require('path');
 
 var randomName = function (length) {
   var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -33,7 +33,10 @@ app.set('view engine', 'hbs');
 app.use('/gist', express.static(path.join(__dirname, 'public')));
 
 app.get('/gist', function (req, res) {
-  res.render('home', {languages: languages, name: 'PlatDev Gist'});
+  res.render('home', {
+    title: 'PlatDev Gist',
+    languages: languages
+  });
 });
 
 app.get('/gist/:id.txt', function (req, res, next) {
@@ -48,20 +51,30 @@ app.get('/gist/:id.txt', function (req, res, next) {
 });
 
 app.get('/gist/:id', function (req, res, next) {
-  fs.readFile(path.join(uploadsDir, req.params.id), function (err, data) {
-    if (err) 
+  fs.readFile(path.join(uploadsDir, req.params.id), function(err, data) {
+    if (err) {
       return next();
+    }
 
-    var gist = JSON.parse(data);
-    var highlighted = highlight(gist.contents, gist.language);
+    var highlighted,
+      gist = JSON.parse(data),
+      params = {
+        title: 'gist:' + req.params.id,
+        language: gist.language,
+        id: req.params.id
+      };
 
-    res.render('gist', {
-      name: 'gist:' + req.params.id,
-      css: highlighted.css,
-      html: highlighted.html,
-      language: gist.language,
-      id: req.params.id
-    });
+    if (gist.language === 'Markdown') {
+      params.type = 'markdown';
+      params.html = marked(gist.contents);
+    } else {
+      highlighted = highlight(gist.contents, gist.language);
+      params.type = 'code';
+      params.css = highlighted.css;
+      params.html = highlighted.html;
+    }
+
+    res.render('gist', params);
   });
 });
 

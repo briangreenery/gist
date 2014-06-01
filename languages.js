@@ -5,6 +5,7 @@ module.exports = [
   {name:'HTML',         mode:'html'},
   {name:'JavaScript',   mode:'javascript'},
   {name:'JSON',         mode:'json'},
+  {name:'Markdown',     mode:'markdown'},
   {name:'Perl',         mode:'perl'},
   {name:'Python',       mode:'python'},
   {name:'Ruby',         mode:'ruby'},
