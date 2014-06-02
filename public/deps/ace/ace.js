@@ -15881,8 +15881,9 @@ ace.define('ace/theme/textmate', ['require', 'exports', 'module' , 'ace/lib/dom'
 exports.isDark = false;
 exports.cssClass = "ace-tm";
 exports.cssText = ".ace-tm .ace_gutter {\
-background: #f0f0f0;\
-color: #333;\
+background: #fff;\
+border-right: 1px solid #eee;\
+color: #bbb;\
 }\
 .ace-tm .ace_print-margin {\
 width: 1px;\
@@ -15991,7 +15992,7 @@ border: 1px solid rgb(192, 192, 192);\
 background: rgba(0, 0, 0, 0.07);\
 }\
 .ace-tm .ace_gutter-active-line {\
-background-color : #dcdcdc;\
+background-color : rgba(0, 0, 0, 0.07);\
 }\
 .ace-tm .ace_marker-layer .ace_selected-word {\
 background: rgb(250, 250, 255);\
