@@ -11,7 +11,7 @@
   height: 500px;
 }
 
-#contents {
+#gist-contents {
   background-color: #fff;
   margin-top: 6px;
   border: 1px solid #e7e7e7;
@@ -26,12 +26,22 @@
   overflow-x: auto;
 }
 
-.markdown {
+.document {
   padding: 30px;
 }
 
-.contents-spacer {
+.document>*:first-child {
+  margin-top: 0px !important;
+}
+
+.code-spacer {
   height: 6px;
   width: 35px;
   border-right: 1px solid #eee;
+}
+
+h1, h2 {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+  line-height: 1.7;
 }

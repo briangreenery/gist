@@ -67,14 +67,14 @@ app.get('/gist/:id', function (req, res, next) {
     if (gist.language === 'Markdown') {
       params.type = 'markdown';
       params.html = marked(gist.contents);
+      res.render('document', params);
     } else {
       highlighted = highlight(gist.contents, gist.language);
       params.type = 'code';
       params.css = highlighted.css;
       params.html = highlighted.html;
+      res.render('code', params);
     }
-
-    res.render('gist', params);
   });
 });
 
