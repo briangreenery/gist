@@ -6,24 +6,24 @@ var express = require('express'),
   marked = require('marked'),
   path = require('path');
 
-var randomName = function (length) {
-  var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+function randomName(length) {
+  var i,
+    name = '',
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-  var name = '';
-  for (var i = 0; i < length; i++) {
-    var number = Math.floor(Math.random() * alphabet.length);
-    name += alphabet[number];
+  for (i = 0; i < length; i++) {
+    name += alphabet[Math.floor(Math.random() * alphabet.length)];
   }
 
   return name;
-};
+}
 
-var uploadsDir = path.join(__dirname, 'uploads');
+var uploadsDir = path.join(__dirname, 'uploads'),
+  app = express(),
+  port = process.env.PORT || 3000;
 
 if (!fs.existsSync(uploadsDir))
   fs.mkdirSync(uploadsDir);
-
-var app = express();
 
 app.disable('x-powered-by');
 
@@ -32,15 +32,15 @@ app.set('view engine', 'hbs');
 
 app.use('/gist', express.static(path.join(__dirname, 'public')));
 
-app.get('/gist', function (req, res) {
+app.get('/gist', function(req, res) {
   res.render('home', {
     title: 'PlatDev Gist',
     languages: languages
   });
 });
 
-app.get('/gist/:id.txt', function (req, res, next) {
-  fs.readFile(path.join(uploadsDir, req.params.id), function (err, data) {
+app.get('/gist/:id.txt', function(req, res, next) {
+  fs.readFile(path.join(uploadsDir, req.params.id), function(err, data) {
     if (err) 
       return next();
 
@@ -50,7 +50,7 @@ app.get('/gist/:id.txt', function (req, res, next) {
   });
 });
 
-app.get('/gist/:id', function (req, res, next) {
+app.get('/gist/:id', function(req, res, next) {
   fs.readFile(path.join(uploadsDir, req.params.id), function(err, data) {
     if (err) {
       return next();
@@ -76,20 +76,17 @@ app.get('/gist/:id', function (req, res, next) {
   });
 });
 
-app.post('/gist/create', function (req, res) {
+app.post('/gist/create', function(req, res) {
   var name = randomName(9);
   req.pipe(fs.createWriteStream(path.join(uploadsDir, name)));
-  req.on('end', function () {
+  req.on('end', function() {
     res.send(name);
   });
 });
 
-app.use(function (req, res, next) {
-  res.status(404);
-  res.render('404');
+app.use(function(req, res, next) {
+  res.status(404).render('404');
 });
 
-var port = process.env.PORT || 3000;
 app.listen(port);
-
-console.log('Listening on port ' + port);
+console.log('Listening on port %d', port);
