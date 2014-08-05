@@ -69,8 +69,8 @@
       'contents': editor.getValue()
     };
 
-    $.post('/gist/create', JSON.stringify(gist), function (response) {
-      window.location.href = location.protocol + '//' + location.host + '/gist/' + response;
+    $.post('/create', JSON.stringify(gist), function (response) {
+      window.location.href = location.protocol + '//' + location.host + '/' + response;
     });
   });
 </script>

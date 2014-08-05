@@ -30,16 +30,16 @@ app.disable('x-powered-by');
 app.engine('hbs', exphbs({defaultLayout: 'main.hbs'}));
 app.set('view engine', 'hbs');
 
-app.use('/gist', express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(path.join(__dirname, 'public')));
 
-app.get('/gist', function(req, res) {
+app.get('/', function(req, res) {
   res.render('home', {
     title: 'PlatDev Gist',
     languages: languages
   });
 });
 
-app.get('/gist/:id.txt', function(req, res, next) {
+app.get('/:id.txt', function(req, res, next) {
   fs.readFile(path.join(uploadsDir, req.params.id), function(err, data) {
     if (err) 
       return next();
@@ -50,7 +50,7 @@ app.get('/gist/:id.txt', function(req, res, next) {
   });
 });
 
-app.get('/gist/:id', function(req, res, next) {
+app.get('/:id', function(req, res, next) {
   fs.readFile(path.join(uploadsDir, req.params.id), function(err, data) {
     if (err) {
       return next();
@@ -76,7 +76,7 @@ app.get('/gist/:id', function(req, res, next) {
   });
 });
 
-app.post('/gist/create', function(req, res) {
+app.post('/create', function(req, res) {
   var name = randomName(9);
   req.pipe(fs.createWriteStream(path.join(uploadsDir, name)));
   req.on('end', function() {
