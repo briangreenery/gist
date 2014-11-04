@@ -1,48 +1,41 @@
 var express = require('express'),
-  exphbs = require('express3-handlebars'),
+  exphbs = require('express-handlebars'),
   fs = require('fs'),
   highlight = require('./lib/highlight'),
   languages = require('./lib/languages'),
   marked = require('marked'),
-  path = require('path');
+  path = require('path'),
+  randomFileName = require('./lib/random');
 
-function randomName(length) {
-  var i,
-    name = '',
-    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-  for (i = 0; i < length; i++) {
-    name += alphabet[Math.floor(Math.random() * alphabet.length)];
-  }
-
-  return name;
-}
-
-var uploadsDir = path.join(__dirname, 'uploads'),
+var uploadsDir = process.env.UPLOAD_DIR || path.join(__dirname, 'uploads'),
   app = express(),
   port = process.env.PORT || 3000;
 
-if (!fs.existsSync(uploadsDir))
+if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir);
+}
 
 app.disable('x-powered-by');
 
 app.engine('hbs', exphbs({defaultLayout: 'main.hbs'}));
 app.set('view engine', 'hbs');
 
+app.locals.brand = process.env.BRAND || 'Code';
+
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
   res.render('home', {
-    title: 'PlatDev Gist',
+    title: app.locals.brand + ' Gist',
     languages: languages
   });
 });
 
 app.get('/:id.txt', function(req, res, next) {
   fs.readFile(path.join(uploadsDir, req.params.id), function(err, data) {
-    if (err) 
+    if (err) {
       return next();
+    }
 
     var gist = JSON.parse(data);
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
@@ -52,17 +45,18 @@ app.get('/:id.txt', function(req, res, next) {
 
 app.get('/:id', function(req, res, next) {
   fs.readFile(path.join(uploadsDir, req.params.id), function(err, data) {
+    var highlighted, gist, params;
+
     if (err) {
       return next();
     }
 
-    var highlighted,
-      gist = JSON.parse(data),
-      params = {
-        title: 'gist:' + req.params.id,
-        language: gist.language,
-        id: req.params.id
-      };
+    gist = JSON.parse(data),
+    params = {
+      title: 'gist:' + req.params.id,
+      language: gist.language,
+      id: req.params.id
+    };
 
     if (gist.language === 'Markdown') {
       params.html = marked(gist.contents);
@@ -76,11 +70,29 @@ app.get('/:id', function(req, res, next) {
   });
 });
 
-app.post('/create', function(req, res) {
-  var name = randomName(9);
-  req.pipe(fs.createWriteStream(path.join(uploadsDir, name)));
-  req.on('end', function() {
-    res.send(name);
+app.post('/create', function(req, res, next) {
+  randomFileName(uploadsDir, function(err, name) {
+    var writeStream;
+
+    if (err) {
+      return next(err);
+    }
+
+    writeStream = fs.createWriteStream(path.join(uploadsDir, name));
+
+    writeStream.on('error', function() {
+      res.status(500).send('Internal server error');
+    });
+
+    req.on('error', function() {
+      writeStream.destroy();
+    });
+
+    writeStream.on('finish', function() {
+      res.send(name);
+    });
+
+    req.pipe(writeStream);
   });
 });
 
